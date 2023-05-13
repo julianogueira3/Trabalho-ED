@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ProductTree productTree = new ProductTree();
+        InventoryManagementSystem inventorySystem = new InventoryManagementSystem();
 
         boolean running = true;
         while (running) {
@@ -30,15 +30,14 @@ public class Main {
                     System.out.print("Preço: ");
                     double price = scanner.nextDouble();
 
-                    Product product = new Product(code, name, quantity, price);
-                    productTree.addProduct(product);
+                    inventorySystem.addProduct(code, name, quantity, price);
                     System.out.println("Produto adicionado ao estoque.");
                     break;
                 case 2:
                     System.out.println("===== Remover Produto =====");
                     System.out.print("Código do produto a ser removido: ");
                     int removeCode = scanner.nextInt();
-                    productTree.removeProduct(removeCode);
+                    inventorySystem.removeProduct(removeCode);
                     System.out.println("Produto removido do estoque.");
                     break;
                 case 3:
@@ -47,12 +46,12 @@ public class Main {
                     int updateCode = scanner.nextInt();
                     System.out.print("Nova quantidade: ");
                     int newQuantity = scanner.nextInt();
-                    productTree.updateQuantity(updateCode, newQuantity);
+                    inventorySystem.updateQuantity(updateCode, newQuantity);
                     System.out.println("Quantidade em estoque atualizada.");
                     break;
                 case 4:
                     System.out.println("===== Exibir Estoque =====");
-                    displayStock(productTree.getRoot());
+                    inventorySystem.displayInventory();
                     break;
                 case 5:
                     running = false;
@@ -66,18 +65,5 @@ public class Main {
         }
 
         scanner.close();
-    }
-
-    private static void displayStock(TreeNode root) {
-        if (root != null) {
-            displayStock(root.getLeft());
-            Product product = root.getProduct();
-            System.out.println("Código: " + product.getCode());
-            System.out.println("Nome: " + product.getName());
-            System.out.println("Quantidade: " + product.getQuantity());
-            System.out.println("Preço: " + product.getPrice());
-            System.out.println("--------------------");
-            displayStock(root.getRight());
-        }
     }
 }
