@@ -52,7 +52,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("===== Exibir Estoque =====");
-                    displayStock(productTree.root);
+                    displayStock(productTree.getRoot());
                     break;
                 case 5:
                     running = false;
@@ -70,14 +70,14 @@ public class Main {
 
     private static void displayStock(TreeNode root) {
         if (root != null) {
-            displayStock(root.left);
-            Product product = root.product;
-            System.out.println("Código: " + product.code);
-            System.out.println("Nome: " + product.name);
-            System.out.println("Quantidade: " + product.quantity);
-            System.out.println("Preço: " + product.price);
+            displayStock(root.getLeft());
+            Product product = root.getProduct();
+            System.out.println("Código: " + product.getCode());
+            System.out.println("Nome: " + product.getName());
+            System.out.println("Quantidade: " + product.getQuantity());
+            System.out.println("Preço: " + product.getPrice());
             System.out.println("--------------------");
-            displayStock(root.right);
+            displayStock(root.getRight());
         }
     }
 }
