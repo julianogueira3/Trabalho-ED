@@ -1,3 +1,10 @@
+//A classe ProductTree representa uma árvore binária de busca que organiza os produtos armazenados no estoque.
+// Ela é composta por nós do tipo TreeNode e possui uma referência para o nó raiz da árvore.
+// A classe contém métodos para adicionar um produto na árvore, remover um produto, atualizar a quantidade de um produto e buscar um nó específico na árvore.
+// Esses métodos são implementados de forma recursiva, percorrendo a árvore e ajustando os nós conforme necessário.
+// A classe também fornece um método para obter a referência do nó raiz.
+// Essa estrutura de árvore facilita a busca e manipulação eficiente dos produtos no estoque.
+
 public class ProductTree {
     private TreeNode root;
 
