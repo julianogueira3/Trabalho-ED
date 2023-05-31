@@ -91,4 +91,43 @@ public class ProductTree {
     public TreeNode getRoot() {
         return root;
     }
+
+
+    public Product searchProductByName(String keyword) {
+        return searchProductByNameRec(root, keyword);
+    }
+
+    private Product searchProductByNameRec(TreeNode root, String keyword) {
+        if (root == null) {
+            return null;
+        }
+
+        int result = keyword.compareToIgnoreCase(root.getProduct().getName());
+        if (result == 0) {
+            return root.getProduct();
+        } else if (result < 0) {
+            return searchProductByNameRec(root.getLeft(), keyword);
+        } else {
+            return searchProductByNameRec(root.getRight(), keyword);
+        }
+    }
+
+    public Product searchProductByPrice(double price) {
+        return searchProductByPriceRec(root, price);
+    }
+
+    private Product searchProductByPriceRec(TreeNode root, double price) {
+        if (root == null) {
+            return null;
+        }
+
+        if (price == root.getProduct().getPrice()) {
+            return root.getProduct();
+        } else if (price < root.getProduct().getPrice()) {
+            return searchProductByPriceRec(root.getLeft(), price);
+        } else {
+            return searchProductByPriceRec(root.getRight(), price);
+        }
+    }
+
 }

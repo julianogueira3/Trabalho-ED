@@ -6,32 +6,45 @@
 // O InventoryManagementSystem é a classe principal que coordena as funcionalidades de gerenciamento do estoque
 // e é utilizada pela classe Main para interagir com o usuário através de um menu de opções.
 
+import java.util.Scanner;
+
 public class InventoryManagementSystem {
-    private ProductTree productTree;
+    private ProductTree searchTreeByName;
+    private ProductTree searchTreeByPrice;
+    private boolean useSearchTreeByName;
 
     public InventoryManagementSystem() {
-        productTree = new ProductTree();
+        searchTreeByName = new ProductTree();
+        searchTreeByPrice = new ProductTree();
+        useSearchTreeByName = true;
     }
 
     public void addProduct(int code, String name, int quantity, double price) {
         Product product = new Product(code, name, quantity, price);
-        productTree.addProduct(product);
+        searchTreeByName.addProduct(product);
+        searchTreeByPrice.addProduct(product);
         System.out.println("Produto adicionado com sucesso!");
     }
 
     public void removeProduct(int code) {
-        productTree.removeProduct(code);
+        searchTreeByName.removeProduct(code);
+        searchTreeByPrice.removeProduct(code);
         System.out.println("Produto removido com sucesso!");
     }
 
     public void updateQuantity(int code, int quantity) {
-        productTree.updateQuantity(code, quantity);
+        searchTreeByName.updateQuantity(code, quantity);
+        searchTreeByPrice.updateQuantity(code, quantity);
         System.out.println("Quantidade atualizada com sucesso!");
     }
 
     public void displayInventory() {
         System.out.println("Estoque:");
-        displayProductTree(productTree.getRoot());
+        if (useSearchTreeByName) {
+            displayProductTree(searchTreeByName.getRoot());
+        } else {
+            displayProductTree(searchTreeByPrice.getRoot());
+        }
     }
 
     private void displayProductTree(TreeNode root) {
@@ -41,4 +54,32 @@ public class InventoryManagementSystem {
             displayProductTree(root.getRight());
         }
     }
+
+    public void setSearchTreeByName() {
+        useSearchTreeByName = true;
+        System.out.println("Utilizando a árvore de busca por nome.");
+    }
+
+    public void setSearchTreeByPrice() {
+        useSearchTreeByName = false;
+        System.out.println("Utilizando a árvore de busca por preço.");
+    }
+
+    public Product searchProduct(String keyword) {
+        if (useSearchTreeByName) {
+            return searchTreeByName.searchProductByName(keyword);
+        } else {
+            return searchTreeByPrice.searchProductByPrice(Double.parseDouble(keyword));
+        }
+    }
+
+    public void addProduct(Product product) {
+        searchTreeByName.addProduct(product);
+        searchTreeByPrice.addProduct(product);
+        System.out.println("Produto adicionado com sucesso!");
+    }
 }
+
+
+
+
