@@ -5,6 +5,9 @@
 // A classe também fornece um método para obter a referência do nó raiz.
 // Essa estrutura de árvore facilita a busca e manipulação eficiente dos produtos no estoque.
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductTree {
     private TreeNode root;
 
@@ -112,9 +115,29 @@ public class ProductTree {
         }
     }
 
-    public Product searchProductByPrice(double price) {
-        return searchProductByPriceRec(root, price);
+    public Product searchProductByCode(int code) {
+        return searchProductByCode(root, code);
     }
+
+    private Product searchProductByCode(TreeNode node, int code) {
+        if (node == null) {
+            return null;
+        }
+
+        int compare = Integer.compare(code, node.getProduct().getCode());
+        if (compare == 0) {
+            return node.getProduct();
+        } else if (compare < 0) {
+            return searchProductByCode(node.getLeft(),code);
+        } else {
+            return searchProductByCode(node.getRight(), code);
+        }
+    }
+
+
+
+
+
 
     private Product searchProductByPriceRec(TreeNode root, double price) {
         if (root == null) {

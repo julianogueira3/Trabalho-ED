@@ -1,23 +1,23 @@
-public class SearchTreeByPrice {
-    private TreeNodeByPrice root;
+public class SearchTreeByCode {
+    private TreeNodeByCode root;
 
-    public SearchTreeByPrice() {
+    public SearchTreeByCode() {
         this.root = null;
     }
 
     public void addNode(Product product) {
-        TreeNodeByPrice newNode = new TreeNodeByPrice(product);
+        TreeNodeByCode newNode = new TreeNodeByCode(product);
 
         if (root == null) {
             root = newNode;
         } else {
-            TreeNodeByPrice currentNode = root;
-            TreeNodeByPrice parent;
+            TreeNodeByCode currentNode = root;
+            TreeNodeByCode parent;
 
             while (true) {
                 parent = currentNode;
 
-                if (product.getPrice() < currentNode.getProduct().getPrice()) {
+                if (product.getCode() < currentNode.getProduct().getCode()) {
                     currentNode = currentNode.getLeft();
 
                     if (currentNode == null) {
@@ -36,19 +36,19 @@ public class SearchTreeByPrice {
         }
     }
 
-    public Product searchProduct(double price) {
-        return searchNode(root, price);
+    public Product searchProduct(int code) {
+        return searchNode(root, code);
     }
 
-    private Product searchNode(TreeNodeByPrice currentNode, double price) {
-        if (currentNode == null || currentNode.getProduct().getPrice() == price) {
+    private Product searchNode(TreeNodeByCode currentNode, int code) {
+        if (currentNode == null || currentNode.getProduct().getCode() == code) {
             return currentNode == null ? null : currentNode.getProduct();
         }
 
-        if (price < currentNode.getProduct().getPrice()) {
-            return searchNode(currentNode.getLeft(), price);
+        if (code < currentNode.getProduct().getCode()) {
+            return searchNode(currentNode.getLeft(), code);
         } else {
-            return searchNode(currentNode.getRight(), price);
+            return searchNode(currentNode.getRight(), code);
         }
     }
 }

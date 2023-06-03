@@ -10,31 +10,31 @@ import java.util.Scanner;
 
 public class InventoryManagementSystem {
     private ProductTree searchTreeByName;
-    private ProductTree searchTreeByPrice;
+    private ProductTree searchTreeByCode;
     private boolean useSearchTreeByName;
 
     public InventoryManagementSystem() {
         searchTreeByName = new ProductTree();
-        searchTreeByPrice = new ProductTree();
+        searchTreeByCode = new ProductTree();
         useSearchTreeByName = true;
     }
 
     public void addProduct(int code, String name, int quantity, double price) {
         Product product = new Product(code, name, quantity, price);
         searchTreeByName.addProduct(product);
-        searchTreeByPrice.addProduct(product);
+        searchTreeByCode.addProduct(product);
         System.out.println("Produto adicionado com sucesso!");
     }
 
     public void removeProduct(int code) {
         searchTreeByName.removeProduct(code);
-        searchTreeByPrice.removeProduct(code);
+        searchTreeByCode.removeProduct(code);
         System.out.println("Produto removido com sucesso!");
     }
 
     public void updateQuantity(int code, int quantity) {
         searchTreeByName.updateQuantity(code, quantity);
-        searchTreeByPrice.updateQuantity(code, quantity);
+        searchTreeByCode.updateQuantity(code, quantity);
         System.out.println("Quantidade atualizada com sucesso!");
     }
 
@@ -43,7 +43,7 @@ public class InventoryManagementSystem {
         if (useSearchTreeByName) {
             displayProductTree(searchTreeByName.getRoot());
         } else {
-            displayProductTree(searchTreeByPrice.getRoot());
+            displayProductTree(searchTreeByCode.getRoot());
         }
     }
 
@@ -60,22 +60,22 @@ public class InventoryManagementSystem {
         System.out.println("Utilizando a árvore de busca por nome.");
     }
 
-    public void setSearchTreeByPrice() {
+    public void setSearchTreeByCode() {
         useSearchTreeByName = false;
-        System.out.println("Utilizando a árvore de busca por preço.");
+        System.out.println("Utilizando a árvore de busca por Código.");
     }
 
     public Product searchProduct(String keyword) {
         if (useSearchTreeByName) {
             return searchTreeByName.searchProductByName(keyword);
         } else {
-            return searchTreeByPrice.searchProductByPrice(Double.parseDouble(keyword));
+            return searchTreeByCode.searchProductByCode(Integer.parseInt(keyword));
         }
     }
 
     public void addProduct(Product product) {
         searchTreeByName.addProduct(product);
-        searchTreeByPrice.addProduct(product);
+        searchTreeByCode.addProduct(product);
         System.out.println("Produto adicionado com sucesso!");
     }
 }
